@@ -38,7 +38,7 @@ export const RegisterScreen = () => {
       </Flex>
 
       <Flex
-        w={['0%', '0%', '0%', '60%']}
+        w={['0%', '0%', '0%', '0%', '60%']}
         h="100%"
         backgroundImage="url('/img/imgbook.svg')"
         backgroundSize="cover"
