@@ -30,12 +30,16 @@ export const LoginScreen = () => {
             alignItems="fle-end"
             justifyContent="flex-end"
           >
-            <Link>Esqueceu sua senha?</Link>
+            <Link onClick={() => navigate('/forgot-password')}>
+              Esqueceu sua senha?
+            </Link>
           </Flex>
-          <Button mt="24px">Login</Button>
+          <Button mb="12px" mt="24px">
+            Login
+          </Button>
           <Link.Action
             onClick={() => navigate('/cadastro')}
-            mt="48px"
+            mt="8px"
             text="Não possui uma conta?"
             actionText="Cadastra-se aqui"
           />
