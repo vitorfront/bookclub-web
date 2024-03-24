@@ -1,26 +1,55 @@
-import { Flex, Image } from '@chakra-ui/react'
+import { Flex, Image, useToast } from '@chakra-ui/react'
 import { Text, Input, Link, Button } from 'components'
 import { useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import { useMutation } from 'react-query'
+import { loginCall } from 'services/api/requests'
+import { saveItem } from 'services/storage'
+
 export const LoginScreen = () => {
   const navigate = useNavigate()
+  const toast = useToast()
+
+  const mutation = useMutation((newUser) => loginCall(newUser), {
+    onError: (error) => {
+      toast({
+        title: 'Falha ao realizar login.',
+        description:
+          error?.response?.data?.error || 'Por favor, tente novamente',
+        status: 'error',
+        duration: 3000,
+        isClosable: true
+      })
+    },
+    onSuccess: (data) => {
+      console.log({ data })
+      toast({
+        title: 'Login feito com sucesso.',
+        status: 'success',
+        duration: 7000,
+        isClosable: true
+      })
+      saveItem('@bookclub_token', data?.data?.token)
+      navigate('/home')
+    }
+  })
 
   const { handleSubmit, values, handleChange, errors } = useFormik({
     initialValues: {
       email: '',
-      Password: ''
+      password: ''
     },
     validationSchema: Yup.object({
       email: Yup.string()
         .email('E-mail inválido')
         .required('E-mail é obrigatório.'),
-      Password: Yup.string()
+      password: Yup.string()
         .min(6, 'Senha deve ter ao menos 6 caracteres')
         .required('Senha é obrigatório.')
     }),
     onSubmit: (data) => {
-      console.log({ data })
+      mutation.mutate(data)
     }
   })
 
@@ -53,8 +82,8 @@ export const LoginScreen = () => {
             error={errors.email}
           />
           <Input.Password
-            id="Password"
-            name="Password"
+            id="password"
+            name="password"
             values={values.Password}
             onChange={handleChange}
             mt="16px"
@@ -71,7 +100,12 @@ export const LoginScreen = () => {
               Esqueceu sua senha?
             </Link>
           </Flex>
-          <Button onClick={handleSubmit} mb="12px" mt="24px">
+          <Button
+            isLoading={mutation.isLoading}
+            onClick={handleSubmit}
+            mb="12px"
+            mt="24px"
+          >
             Login
           </Button>
           <Link.Action
