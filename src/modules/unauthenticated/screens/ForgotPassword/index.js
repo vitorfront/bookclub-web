@@ -21,6 +21,7 @@ export const ForgotPasswordScreen = () => {
         isClosable: true
       })
     },
+
     onSuccess: (data) => {
       console.log({ data })
       toast({
@@ -33,7 +34,6 @@ export const ForgotPasswordScreen = () => {
       navigate(`/reset-password?email=${values.email}`)
     }
   })
-
   const { handleSubmit, values, handleChange, errors } = useFormik({
     initialValues: {
       email: ''

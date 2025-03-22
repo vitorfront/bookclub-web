@@ -1,5 +1,5 @@
-import { Text } from 'components/atoms/Text'
 import { useState } from 'react'
+import { Text } from 'components/atoms/Text'
 import {
   Input as ChakraInput,
   InputGroup,
@@ -26,18 +26,18 @@ Input.Password = ({ value, onChange, id, name, ...props }) => {
   return (
     <>
       <InputGroup
+        display="flex"
         alignItems="center"
         justifyContent="center"
-        display="flex"
         h="56px"
         size="md"
         {...props}
       >
         <Input
           id={id}
-          value={value}
-          onChange={onChange}
           name={name}
+          onChange={onChange}
+          value={value}
           focusBorderColor="brand.primary"
           pr="4.5rem"
           fontSize="16px"
@@ -48,9 +48,9 @@ Input.Password = ({ value, onChange, id, name, ...props }) => {
           <Button
             bg="transparent"
             _hover={{ bg: 'transparent' }}
-            h="1.75rem"
             size="sm"
             onClick={handleClick}
+            h="100%"
             display="flex"
             alignItems="center"
             justifyContent="center"

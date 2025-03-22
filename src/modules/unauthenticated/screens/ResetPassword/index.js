@@ -24,7 +24,7 @@ export const ResetPasswordScreen = () => {
     },
     onSuccess: () => {
       toast({
-        title: 'Senha salva com sucesso!.',
+        title: 'Senha alterada com sucesso!.',
         status: 'success',
         duration: 4000,
         isClosable: true

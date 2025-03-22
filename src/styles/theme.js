@@ -8,7 +8,13 @@ export const theme = extendTheme({
   styles: {
     global: {
       'html, body': {
-        fontFamily: 'Inter'
+        fontFamily: 'Inter',
+        padding: 0,
+        margin: 0,
+        backgroundColor: colors.background,
+        width: '100vw',
+        scrollX: false,
+        overflowX: 'hidden'
       }
     }
   }
